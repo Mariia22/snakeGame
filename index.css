@@ -1,0 +1,53 @@
+:root {
+  --backgroundBoard: #353336;
+  --backgroundHeader: #121214;
+  --backgroundCanvas: #161618;
+  --colorBoard: #66FF00;
+}
+
+body {
+  margin: 0px;
+  font-family: sans-serif;
+}
+
+.board {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--backgroundBoard);
+}
+
+.board__header {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.board__score {
+  padding: 10px 15px;
+  min-width: 160px;
+  height: 50px;
+  background: var(--backgroundHeader);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board__score__count {
+  font-size: 48px;
+  color: var(--colorBoard);
+  font-weight: bold;
+}
+
+.board__canvas {
+  background-color: var(--backgroundCanvas);
+  border-radius: 5px;
+  border: 10px solid var(--backgroundCanvas);
+  box-shadow: 0px 0px 40px 10px var(--backgroundCanvas);
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.2'%3E%3Ccircle cx='8' cy='8' r='4' fill='%23525053'/%3E%3C/g%3E%3C/svg%3E%0A");
+}
