@@ -10,7 +10,7 @@ export default class Snake {
         this.tails = [];
         this.controlSnake();
     }
-    update(apple, score) {
+    update(apple, score, canvas) {
         this.x += this.dx;
         this.y += this.dy;
         this.tails.unshift({ x: this.x, y: this.y });
@@ -25,12 +25,13 @@ export default class Snake {
             }
             for (let i = index + 1; i < this.tails.length; i++) {
                 if (item.x === this.tails[i].x && item.y === this.tails[i].y) {
-                    this.endGame();
-                    score.setToZero();
-                    apple.randomPosition();
+                    this.finish(apple, score);
                 }
             }
         });
+        if (this.x < 0 || this.x >= canvas.element.width || this.y < 0 || this.y >= canvas.element.height) {
+            this.finish(apple, score);
+        }
     }
     draw(context) {
         this.tails.forEach((item, index) => {
@@ -58,9 +59,14 @@ export default class Snake {
             }
         });
     }
+    finish(apple, score) {
+        this.endGame();
+        score.setToZero();
+        apple.randomPosition();
+    }
     endGame() {
-        this.x = 20;
-        this.y = 20;
+        this.x = 16;
+        this.y = 16;
         this.dx = this.config.sizeCell;
         this.dy = 0;
         this.tails = [];

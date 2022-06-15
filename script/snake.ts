@@ -1,4 +1,4 @@
-import { IConfig, ISnake, ISnakeObj, IScore, IApple } from "./types";
+import { IConfig, ISnake, ISnakeObj, IScore, IApple, ICanvas } from "./types";
 import Config from './config.js';
 
 
@@ -22,9 +22,10 @@ export default class Snake implements ISnake {
     this.controlSnake()
   }
 
-  update(apple: IApple, score: IScore) {
+  update(apple: IApple, score: IScore, canvas: ICanvas) {
     this.x += this.dx
     this.y += this.dy
+
     this.tails.unshift({ x: this.x, y: this.y })
     if (this.tails.length > this.maxTail) {
       this.tails.pop()
@@ -39,12 +40,14 @@ export default class Snake implements ISnake {
 
       for (let i: number = index + 1; i < this.tails.length; i++) {
         if (item.x === this.tails[i].x && item.y === this.tails[i].y) {
-          this.endGame()
-          score.setToZero()
-          apple.randomPosition()
+          this.finish(apple, score)
         }
       }
     })
+
+    if (this.x < 0 || this.x >= canvas.element.width || this.y < 0 || this.y >= canvas.element.height) {
+      this.finish(apple, score)
+    }
   }
 
   draw(context: CanvasRenderingContext2D) {
@@ -75,11 +78,18 @@ export default class Snake implements ISnake {
     })
   }
 
+  finish(apple: IApple, score: IScore) {
+    this.endGame()
+    score.setToZero()
+    apple.randomPosition()
+  }
+
   endGame() {
-    this.x = 20
-    this.y = 20
+    this.x = 16
+    this.y = 16
     this.dx = this.config.sizeCell
     this.dy = 0
     this.tails = []
   }
+
 }

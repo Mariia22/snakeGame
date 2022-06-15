@@ -26,7 +26,7 @@ class Game {
   }
 
   update() {
-    this.snake.update(this.apple, this.score)
+    this.snake.update(this.apple, this.score, this.canvas)
   }
 }
 let wrapper = document.querySelector('.board__canvas');

@@ -37,5 +37,5 @@ export interface ISnake {
   maxTail: number
   tails: Array<ISnakeObj>
   draw(context: CanvasRenderingContext2D): void
-  update(apple: IApple, score: IScore): void
+  update(apple: IApple, score: IScore, canvas: ICanvas): void
 }
