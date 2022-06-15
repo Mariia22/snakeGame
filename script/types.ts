@@ -18,3 +18,16 @@ export interface IApple {
   y: number
   draw(context: CanvasRenderingContext2D): void
 }
+export interface ISnakeObj {
+  x: number
+  y: number
+}
+export interface ISnake {
+  x: number
+  y: number
+  dx: number
+  dy: number
+  tails: Array<ISnakeObj>
+  draw(context: CanvasRenderingContext2D): void
+  update(): void
+}
