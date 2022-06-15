@@ -9,7 +9,7 @@ export default class Config implements IConfig {
   constructor() {
     this.sizeCell = 16;
     this.sizeApple = this.sizeCell / 4;
-    this.snakeSpeed = 1;
+    this.snakeSpeed = 25;
     this.step = 1;
   }
 }

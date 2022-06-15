@@ -17,7 +17,7 @@ class Game {
         this.snake.draw(this.canvas.context);
     }
     update() {
-        this.snake.update();
+        this.snake.update(this.apple, this.score);
     }
 }
 let wrapper = document.querySelector('.board__canvas');
