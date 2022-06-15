@@ -6,12 +6,14 @@ export default class AnimationGame implements IAnimation {
   update: Function
   draw: Function
   speed: number
+  gameOver: boolean
 
   constructor(update: Function, draw: Function) {
     this.update = update
     this.draw = draw
     this.config = new Config()
     this.speed = this.config.snakeSpeed
+    this.gameOver = false
     this.animate = this.animate.bind(this)
     this.animate()
   }
@@ -24,7 +26,12 @@ export default class AnimationGame implements IAnimation {
     this.speed = this.config.snakeSpeed
   }
 
+  changeGameOver() {
+    this.gameOver = true
+  }
+
   animate() {
+    if (this.gameOver) return;
     requestAnimationFrame(this.animate)
 
     if (++this.config.step < this.speed) {

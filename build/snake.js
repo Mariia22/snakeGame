@@ -64,10 +64,15 @@ export default class Snake {
         });
     }
     finish(apple, score, animation) {
-        this.endGame();
-        score.setToZero();
-        apple.randomPosition();
-        animation.takeOffSpeed();
+        if (confirm("You lost. Press OK to restart")) {
+            this.endGame();
+            score.setToZero();
+            apple.randomPosition();
+            animation.takeOffSpeed();
+        }
+        else {
+            animation.changeGameOver();
+        }
     }
     endGame() {
         this.x = 16;

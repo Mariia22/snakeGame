@@ -45,6 +45,8 @@ export interface IAnimation {
   update: Function
   draw: Function
   speed: number
+  gameOver: boolean
   increaseSpeed(): void
   takeOffSpeed(): void
+  changeGameOver(): void
 }

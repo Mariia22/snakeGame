@@ -84,10 +84,15 @@ export default class Snake implements ISnake {
   }
 
   finish(apple: IApple, score: IScore, animation: IAnimation) {
-    this.endGame()
-    score.setToZero()
-    apple.randomPosition()
-    animation.takeOffSpeed()
+    if (confirm("You lost. Press OK to restart")) {
+      this.endGame()
+      score.setToZero()
+      apple.randomPosition()
+      animation.takeOffSpeed()
+    }
+    else {
+      animation.changeGameOver();
+    }
   }
 
   endGame() {
