@@ -3,6 +3,7 @@ import { ICanvas, IScore, IApple, ISnake } from "./types";
 import Score from './score.js';
 import Apple from './apple.js';
 import Snake from './snake.js';
+import AnimationGame from './animation.js';
 
 class Game {
   canvas: ICanvas
@@ -15,6 +16,7 @@ class Game {
     this.score = new Score('.board__score__count', 0)
     this.apple = new Apple(this.canvas)
     this.snake = new Snake()
+    new AnimationGame(this.update.bind(this), this.draw.bind(this));
   }
 
   draw() {

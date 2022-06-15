@@ -10,9 +10,9 @@ export default class Snake implements ISnake {
   tails: Array<ISnakeObj>
 
   constructor() {
-    this.config = new Config();
-    this.x = 200
-    this.y = 200
+    this.config = new Config()
+    this.x = 20
+    this.y = 20
     this.dx = this.config.sizeCell
     this.dy = 0
     this.tails = []
@@ -21,7 +21,7 @@ export default class Snake implements ISnake {
     this.x += this.dx
     this.y += this.dy
     this.tails.unshift({ x: this.x, y: this.y })
-    this.tails.pop()
+    //this.tails.pop()
   }
 
   draw(context: CanvasRenderingContext2D) {
@@ -32,8 +32,8 @@ export default class Snake implements ISnake {
   }
 
   endGame() {
-    this.x = 200
-    this.y = 200
+    this.x = 20
+    this.y = 20
     this.dx = this.config.sizeCell
     this.dy = 0
     this.tails = []

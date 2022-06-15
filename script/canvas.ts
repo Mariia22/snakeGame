@@ -6,8 +6,8 @@ export default class Canvas implements ICanvas {
 
   constructor(container: Element) {
     this.element = document.createElement('canvas');
-    this.element.width = 400;
-    this.element.height = 400;
+    this.element.width = 320;
+    this.element.height = 320;
     let res = this.element.getContext('2d');
     if (!res) {
       throw new Error('Failed to get 2D context');

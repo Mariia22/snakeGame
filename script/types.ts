@@ -11,6 +11,8 @@ export interface IScore {
 export interface IConfig {
   sizeCell: number
   sizeApple: number
+  step: number
+  snakeSpeed: number
 }
 
 export interface IApple {
