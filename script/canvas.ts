@@ -3,10 +3,10 @@ import { ICanvas } from "./types";
 export default class Canvas implements ICanvas {
   element: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
-  
+
   constructor(container: Element) {
     this.element = document.createElement('canvas');
-    this.element.width = 320;
+    this.element.width = 400;
     this.element.height = 400;
     let res = this.element.getContext('2d');
     if (!res) {

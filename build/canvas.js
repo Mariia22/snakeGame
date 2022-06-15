@@ -1,7 +1,7 @@
 export default class Canvas {
     constructor(container) {
         this.element = document.createElement('canvas');
-        this.element.width = 320;
+        this.element.width = 400;
         this.element.height = 400;
         let res = this.element.getContext('2d');
         if (!res) {
