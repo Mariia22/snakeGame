@@ -1,4 +1,4 @@
-import { IConfig, ISnake, ISnakeObj, IScore, IApple, ICanvas } from "./types";
+import { IConfig, ISnake, ISnakeObj, IScore, IApple, ICanvas, IAnimation } from "./types";
 import Config from './config.js';
 
 
@@ -9,6 +9,7 @@ export default class Snake implements ISnake {
   dx: number
   dy: number
   maxTail: number
+  speedLimit: number
   tails: Array<ISnakeObj>
 
   constructor() {
@@ -18,11 +19,12 @@ export default class Snake implements ISnake {
     this.dx = this.config.sizeCell
     this.dy = 0
     this.maxTail = 1
+    this.speedLimit = 5
     this.tails = []
     this.controlSnake()
   }
 
-  update(apple: IApple, score: IScore, canvas: ICanvas) {
+  update(apple: IApple, score: IScore, canvas: ICanvas, animation: IAnimation) {
     this.x += this.dx
     this.y += this.dy
 
@@ -36,17 +38,20 @@ export default class Snake implements ISnake {
         this.maxTail++
         score.increaseScore()
         apple.randomPosition()
+        if (this.tails.length > 1 && this.tails.length % this.speedLimit === 0) {
+          animation.increaseSpeed();
+        }
       }
 
       for (let i: number = index + 1; i < this.tails.length; i++) {
         if (item.x === this.tails[i].x && item.y === this.tails[i].y) {
-          this.finish(apple, score)
+          this.finish(apple, score, animation)
         }
       }
     })
 
     if (this.x < 0 || this.x >= canvas.element.width || this.y < 0 || this.y >= canvas.element.height) {
-      this.finish(apple, score)
+      this.finish(apple, score, animation)
     }
   }
 
@@ -78,10 +83,11 @@ export default class Snake implements ISnake {
     })
   }
 
-  finish(apple: IApple, score: IScore) {
+  finish(apple: IApple, score: IScore, animation: IAnimation) {
     this.endGame()
     score.setToZero()
     apple.randomPosition()
+    animation.takeOffSpeed()
   }
 
   endGame() {
@@ -90,6 +96,7 @@ export default class Snake implements ISnake {
     this.dx = this.config.sizeCell
     this.dy = 0
     this.tails = []
+    this.maxTail = 1
   }
 
 }

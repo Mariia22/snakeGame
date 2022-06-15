@@ -1,5 +1,5 @@
 import Canvas from './canvas.js';
-import { ICanvas, IScore, IApple, ISnake } from "./types";
+import { ICanvas, IScore, IApple, ISnake, IAnimation } from "./types";
 import Score from './score.js';
 import Apple from './apple.js';
 import Snake from './snake.js';
@@ -10,13 +10,14 @@ class Game {
   score: IScore
   apple: IApple
   snake: ISnake
+  animation: IAnimation
 
   constructor(container: Element) {
     this.canvas = new Canvas(container);
     this.score = new Score('.board__score__count', 0)
     this.apple = new Apple(this.canvas)
     this.snake = new Snake()
-    new AnimationGame(this.update.bind(this), this.draw.bind(this));
+    this.animation = new AnimationGame(this.update.bind(this), this.draw.bind(this));
   }
 
   draw() {
@@ -26,7 +27,7 @@ class Game {
   }
 
   update() {
-    this.snake.update(this.apple, this.score, this.canvas)
+    this.snake.update(this.apple, this.score, this.canvas, this.animation)
   }
 }
 let wrapper = document.querySelector('.board__canvas');

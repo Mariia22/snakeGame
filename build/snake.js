@@ -7,10 +7,11 @@ export default class Snake {
         this.dx = this.config.sizeCell;
         this.dy = 0;
         this.maxTail = 1;
+        this.speedLimit = 5;
         this.tails = [];
         this.controlSnake();
     }
-    update(apple, score, canvas) {
+    update(apple, score, canvas, animation) {
         this.x += this.dx;
         this.y += this.dy;
         this.tails.unshift({ x: this.x, y: this.y });
@@ -22,15 +23,18 @@ export default class Snake {
                 this.maxTail++;
                 score.increaseScore();
                 apple.randomPosition();
+                if (this.tails.length > 1 && this.tails.length % this.speedLimit === 0) {
+                    animation.increaseSpeed();
+                }
             }
             for (let i = index + 1; i < this.tails.length; i++) {
                 if (item.x === this.tails[i].x && item.y === this.tails[i].y) {
-                    this.finish(apple, score);
+                    this.finish(apple, score, animation);
                 }
             }
         });
         if (this.x < 0 || this.x >= canvas.element.width || this.y < 0 || this.y >= canvas.element.height) {
-            this.finish(apple, score);
+            this.finish(apple, score, animation);
         }
     }
     draw(context) {
@@ -59,10 +63,11 @@ export default class Snake {
             }
         });
     }
-    finish(apple, score) {
+    finish(apple, score, animation) {
         this.endGame();
         score.setToZero();
         apple.randomPosition();
+        animation.takeOffSpeed();
     }
     endGame() {
         this.x = 16;
@@ -70,5 +75,6 @@ export default class Snake {
         this.dx = this.config.sizeCell;
         this.dy = 0;
         this.tails = [];
+        this.maxTail = 1;
     }
 }

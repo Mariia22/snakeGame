@@ -9,7 +9,7 @@ class Game {
         this.score = new Score('.board__score__count', 0);
         this.apple = new Apple(this.canvas);
         this.snake = new Snake();
-        new AnimationGame(this.update.bind(this), this.draw.bind(this));
+        this.animation = new AnimationGame(this.update.bind(this), this.draw.bind(this));
     }
     draw() {
         this.canvas.context.clearRect(0, 0, this.canvas.element.width, this.canvas.element.height);
@@ -17,7 +17,7 @@ class Game {
         this.snake.draw(this.canvas.context);
     }
     update() {
-        this.snake.update(this.apple, this.score, this.canvas);
+        this.snake.update(this.apple, this.score, this.canvas, this.animation);
     }
 }
 let wrapper = document.querySelector('.board__canvas');
