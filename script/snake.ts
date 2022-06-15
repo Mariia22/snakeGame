@@ -19,6 +19,7 @@ export default class Snake implements ISnake {
     this.dy = 0
     this.maxTail = 1
     this.tails = []
+    this.controlSnake()
   }
 
   update(apple: IApple, score: IScore) {
@@ -50,6 +51,27 @@ export default class Snake implements ISnake {
     this.tails.forEach((item, index) => {
       index === 0 ? context.fillStyle = '#91FF02' : context.fillStyle = '#66FF00'
       context.fillRect(item.x, item.y, this.config.sizeCell, this.config.sizeCell)
+    })
+  }
+
+  controlSnake() {
+    document.addEventListener('keydown', (e) => {
+      if (e.code === "ArrowUp") {
+        this.dx = 0
+        this.dy = -this.config.sizeCell
+      }
+      else if (e.code === "ArrowDown") {
+        this.dx = 0
+        this.dy = this.config.sizeCell
+      }
+      else if (e.code === "ArrowLeft") {
+        this.dx = -this.config.sizeCell
+        this.dy = 0
+      }
+      else if (e.code === "ArrowRight") {
+        this.dx = this.config.sizeCell
+        this.dy = 0
+      }
     })
   }
 
